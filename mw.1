@@ -1,297 +1,303 @@
 .TH MW 1 mutt-wizard
 .SH NAME
-mw \- mutt-wizard \- autoconfigure email accounts for neomutt and isync
-.SH SYNOPSIS
+mw \- mutt-wizard \- E-Mail-Konten für neomutt und isync automatisch konfigurieren
+.SH ÜBERSICHT
 .B mw
 [
-.I OPTIONS
+.I OPTIONEN
 ]
-.SH DESCRIPTION
+.SH BESCHREIBUNG
 .B mw
-takes a user email account and sets up a terminal-based email interface for it with
-.B neomutt.
-This can include offline email with
+nimmt ein Benutzer-E-Mail-Konto und richtet dafür eine terminalbasierte E-Mail-Schnittstelle mit
+.B neomutt
+ein. Dies kann Offline-E-Mails mit
 .B isync/mbsync
-and configs for
+und Konfigurationen für
 .B msmtp
-for sending mail, and also passwords automatically encrypted and stored with
-.B pass.
-.SH COMMANDS
+zum Versenden von E-Mails umfassen, sowie automatisch verschlüsselte und mit
+.B pass
+gespeicherte Passwörter.
+.SH BEFEHLE
 .TP
-.B -a your@email.com
-add an email address
+.B -a ihre@email.com
+ein E-Mail-Konto hinzufügen
 .TP
 .B -l
-list all email accounts configured by mutt-wizard
+alle von mutt-wizard konfigurierten E-Mail-Konten auflisten
 .TP
 .B -d
-pick an already configured account and remove its configuration
+ein bereits konfiguriertes Konto auswählen und dessen Konfiguration entfernen
 .TP
-.B -D your@email.com
-remove a configured account without confirmation
+.B -D ihre@email.com
+ein konfiguriertes Konto ohne Bestätigung entfernen
 .TP
-.B -y your@email.com
-download and upload mail for an email account
+.B -y ihre@email.com
+E-Mails für ein E-Mail-Konto herunterladen und hochladen
 .TP
 .B -Y
-sync all email accounts
+alle E-Mail-Konten synchronisieren
 .TP
 .B -t 15
-toggle a cronjob that syncs your mail every 15 minutes (or any other number under 60)
+einen Cronjob umschalten, der Ihre E-Mails alle 15 Minuten synchronisiert (oder eine andere Zahl unter 60)
 .TP
 .B -T
-toggle a cronjob without specifying minutes between sync
+einen Cronjob umschalten, ohne Minuten zwischen Synchronisationen anzugeben
 .TP
 .B -r
-reorder account shortcut numbers
-.SH OPTIONS FOR ADDING ACCOUNTS
-These can be specified on the command line, otherwise, you will be prompted for what is necessary. mutt-wizard knows the IMAP/SMTP server information for most email providers, so specifying them is usually redundant.
+Konten-Kurznummern neu ordnen
+.SH OPTIONEN ZUM HINZUFÜGEN VON KONTEN
+Diese können in der Befehlszeile angegeben werden, andernfalls werden Sie nach den notwendigen Informationen gefragt. mutt-wizard kennt die IMAP/SMTP-Serverinformationen für die meisten E-Mail-Anbieter, daher ist deren Angabe meist überflüssig.
 .TP
-.B -u billy
-Account logon/username if required and different from email address.
+.B -u max
+Konto-Anmeldename/Benutzername, falls erforderlich und anders als die E-Mail-Adresse.
 .TP
-.B -n Billy
-Real name which will appear in emails. Should be put in quotes if multiple words.
+.B -n Max
+Echter Name, der in E-Mails erscheinen wird. Sollte in Anführungszeichen gesetzt werden, wenn er aus mehreren Wörtern besteht.
 .TP
-.B -m number
-Set a maximum number of messages to be stored offline.
+.B -m Zahl
+Legt eine maximale Anzahl von Nachrichten fest, die offline gespeichert werden sollen.
 .TP
 .B -i
-IMAP/POP server address
+IMAP/POP-Serveradresse
 .TP
 .B -I
-IMAP/POP server port (assumed to be 993 for IMAP and 995 for POP if not specified)
+IMAP/POP-Serverport (wird als 993 für IMAP und 995 für POP angenommen, wenn nicht angegeben)
 .TP
 .B -s
-SMTP server address
+SMTP-Serveradresse
 .TP
 .B -S
-SMTP server port (assumed to be 465 if not specified)
+SMTP-Serverport (wird als 465 angenommen, wenn nicht angegeben)
 .TP
 .B -x
-Account password. You will be prompted for the password interactively if this option is not given.
+Kontopasswort. Sie werden interaktiv nach dem Passwort gefragt, wenn diese Option nicht angegeben wird.
 .B -P
-Pass Prefix. The password will be stored using pass at <passprefix><email>
-.SH OTHER OPTIONS
+Pass-Präfix. Das Passwort wird mit pass unter <passprefix><email> gespeichert
+.SH ANDERE OPTIONEN
 .TP
 .B -f
-Force account creation and guess mailboxes without attempting to connect to server. Otherwise if connection cannot be made, the configured account settings will not be persistent.
+Erzwingt die Kontoerstellung und errät Postfächer, ohne zu versuchen, eine Verbindung zum Server herzustellen. Andernfalls werden die konfigurierten Kontoeinstellungen nicht dauerhaft sein, wenn keine Verbindung hergestellt werden kann.
 .TP
 .B -o
-Create settings for an account to be used online only without mail syncing abilities. Without
+Erstellt Einstellungen für ein Konto, das nur online ohne E-Mail-Synchronisationsfähigkeiten verwendet werden soll. Ohne
 .B -f
-connection will still be attempted in setup to discover mailboxes.
+wird während der Einrichtung trotzdem versucht, eine Verbindung herzustellen, um Postfächer zu entdecken.
 .TP
 .B -X
-When removing an email profile with either
+Beim Entfernen eines E-Mail-Profils mit entweder
 .I -d
-or
-.I -D,
-also delete the local mail (will not delete the mail on the server).
+oder
+.I -D
+auch die lokalen E-Mails löschen (löscht die E-Mails nicht auf dem Server).
 .TP
 .B -p
-Use POP protocol instead of IMAP. Requires
+Verwendet das POP-Protokoll anstelle von IMAP. Erfordert
 .I mpop
-to download mail after configuration. Server details can still be given with the
+zum Herunterladen von E-Mails nach der Konfiguration. Serverdetails können trotzdem mit den Optionen
 .I -i
-and
+und
 .I -I
-options as if it were a IMAP.
+angegeben werden, als wäre es IMAP.
 .SH DETAILS
 .TP
 .B mailsync
-mutt-wizard calls a script
+mutt-wizard ruft ein Skript
 .I mailsync
-to sync mail. This script additionally indexes new mail with notmuch and gives you a notification if new mail has arrived. If you want to bypass its additional features, you can always just run
+auf, um E-Mails zu synchronisieren. Dieses Skript indiziert zusätzlich neue E-Mails mit notmuch und benachrichtigt Sie, wenn neue E-Mails eingetroffen sind. Wenn Sie seine zusätzlichen Funktionen umgehen möchten, können Sie immer einfach
 .I mbsync -a
-to sync your mail directly.
+ausführen, um Ihre E-Mails direkt zu synchronisieren.
 .TP
-.B Mail location
-If the user chooses to keep offline email with
-.B isync,
-it will be kept in
-.I ~/.local/share/mail/.
+.B E-Mail-Speicherort
+Wenn der Benutzer sich entscheidet, Offline-E-Mails mit
+.B isync
+zu behalten, werden diese in
+.I ~/.local/share/mail/
+gespeichert.
 .B notmuch
-can be used to index and search this mail by giving this directory when first running
-.B notmuch setup.
-If you have not set up notmuch before, mutt-wizard will automatically set it up in the background the first time you add an account.
+kann verwendet werden, um diese E-Mails zu indizieren und zu durchsuchen, indem dieses Verzeichnis beim ersten Ausführen von
+.B notmuch setup
+angegeben wird.
+Wenn Sie notmuch noch nicht eingerichtet haben, wird mutt-wizard es automatisch im Hintergrund einrichten, wenn Sie zum ersten Mal ein Konto hinzufügen.
 .TP
-.B muttrc files
-mutt-wizard will create a muttrc file for each created account holding account-specific details. These will appear in
+.B muttrc-Dateien
+mutt-wizard erstellt für jedes erstellte Konto eine muttrc-Datei mit kontospezifischen Details. Diese erscheinen in
 .I ~/.config/mutt/accounts/
-and can be edited by the user if needbe. Note that the mutt-wizard will also source these files and create the bindings to switch between them, and these will appear in your default
+und können bei Bedarf vom Benutzer bearbeitet werden. Beachten Sie, dass der mutt-wizard diese Dateien auch einbindet und die Bindungen zum Wechseln zwischen ihnen erstellt. Diese erscheinen in Ihrer Standard-
 .I ~/.config/mutt/muttrc
-file.
+Datei.
 .TP
-.B Mail deletion
-mutt-wizard's delete action will delete configuration files and
-.I not
-downloaded mail for safety (and time)'s sake. If you want to delete downloaded mail, do so manually by removing it from the directory above.
+.B E-Mail-Löschung
+Die Löschaktion von mutt-wizard löscht Konfigurationsdateien und
+.I nicht
+heruntergeladene E-Mails aus Sicherheits- (und Zeit-)gründen. Wenn Sie heruntergeladene E-Mails löschen möchten, tun Sie dies manuell, indem Sie sie aus dem oben genannten Verzeichnis entfernen.
 .TP
-.B Default settings
-The mutt-wizard has many default settings that focus on making it aesthetically pleasing and supplying more vim-like bindings. These can be found in
+.B Standardeinstellungen
+Der mutt-wizard hat viele Standardeinstellungen, die sich darauf konzentrieren, ihn optisch ansprechend zu gestalten und mehr vim-ähnliche Bindungen bereitzustellen. Diese finden Sie in
 .I /usr/local/share/mutt-wizard/mutt-wizard.muttrc
-and the default mailcap file can be found in
+und die Standard-Mailcap-Datei finden Sie in
 .I
 /usr/local/share/mutt-wizard/mailcap.
-Any of these settings can be overwritten in
-.I ~/.config/mutt/muttrc,
-but be mindful that your overriding binds should appear after the
+Jede dieser Einstellungen kann in
+.I ~/.config/mutt/muttrc
+überschrieben werden, aber beachten Sie, dass Ihre überschreibenden Bindungen nach dem Einbinden der
 .I
 mutt-wizard.muttrc
-file is sourced.
+Datei erscheinen sollten.
 .TP
-.B Detecting server settings
-mutt-wizard has a repository of email services and their server information kept in
+.B Erkennen von Servereinstellungen
+mutt-wizard hat ein Repository von E-Mail-Diensten und deren Serverinformationen, das in
 .I /usr/local/share/mutt-wizard/domains.csv
-which is used to automatically configure email settings.
-If your email provider is not found there, it will prompt you to input your email service's IMAP and SMTP server information which can usually be found by searching online.
+gespeichert ist und zur automatischen Konfiguration von E-Mail-Einstellungen verwendet wird.
+Wenn Ihr E-Mail-Anbieter dort nicht gefunden wird, werden Sie aufgefordert, die IMAP- und SMTP-Serverinformationen Ihres E-Mail-Dienstes einzugeben, die normalerweise durch eine Online-Suche gefunden werden können.
 
-If you would like to help develop mutt-wizard for others, you are invited to add this service information to
+Wenn Sie bei der Entwicklung von mutt-wizard für andere helfen möchten, sind Sie eingeladen, diese Serviceinformationen zu
 .I domains.csv
-on mutt-wizard's Github <https://github.com/lukesmithxyz/mutt-wizard> or Gitlab <https://gitlab.com/lukesmithxyz/mutt-wizard> pages.
+auf den Github- <https://github.com/lukesmithxyz/mutt-wizard> oder Gitlab- <https://gitlab.com/lukesmithxyz/mutt-wizard> Seiten von mutt-wizard hinzuzufügen.
 .TP
-.B Gmail accounts
-Google will require you to allow "less-secure" (third party) applications or remove two-factor authentication in order to access their IMAP servers to download your mail. If you use Gmail, be sure to handle this before running mutt-wizard <https://support.google.com/accounts/answer/6010255>.
+.B Gmail-Konten
+Google wird von Ihnen verlangen, dass Sie "weniger sichere" (Drittanbieter-) Anwendungen zulassen oder die Zwei-Faktor-Authentifizierung entfernen, um auf ihre IMAP-Server zugreifen zu können, um Ihre E-Mails herunterzuladen. Wenn Sie Gmail verwenden, stellen Sie sicher, dass Sie dies vor dem Ausführen von mutt-wizard erledigen <https://support.google.com/accounts/answer/6010255>.
 .TP
-.B Enterprise and university accounts
-Many universities and businesses might host their domain's email via Google or another service. This often requires a special IMAP/SMTP-specific password that you must generate and use. Again, mutt-wizard can handle these systems, but only once they've been set up.
+.B Unternehmens- und Universitätskonten
+Viele Universitäten und Unternehmen hosten möglicherweise die E-Mails ihrer Domain über Google oder einen anderen Dienst. Dies erfordert oft ein spezielles IMAP/SMTP-spezifisches Passwort, das Sie generieren und verwenden müssen. Auch hier kann mutt-wizard mit diesen Systemen umgehen, aber erst nachdem sie eingerichtet wurden.
 .TP
-.B Password decryption
-mutt-wizard uses
+.B Passwort-Entschlüsselung
+mutt-wizard verwendet
 .I pass
-and therefore
+und daher
 .I gpg
-to decrypt your passwords. Provided your GPG key has a password, this might mean that you will be prompted for your GPG password the first time you sync or send mail in a session. Once your password is cached, it might also expire later as well.
+zur Entschlüsselung Ihrer Passwörter. Vorausgesetzt, Ihr GPG-Schlüssel hat ein Passwort, kann dies bedeuten, dass Sie beim ersten Synchronisieren oder Senden von E-Mails in einer Sitzung nach Ihrem GPG-Passwort gefragt werden. Sobald Ihr Passwort zwischengespeichert ist, kann es später auch ablaufen.
 
-Because of this I strongly recommend the program
+Aufgrund dessen empfehle ich dringend das Programm
 .I pam-gnupg
-<https://github.com/cruegge/pam-gnupg> which automatically unlocks your GPG password on login and keeps it active, thus giving you, with mutt-wizard, secure access to all your email accounts on your system without ever having to input a password.
+<https://github.com/cruegge/pam-gnupg>, das Ihr GPG-Passwort beim Login automatisch entsperrt und aktiv hält, und Ihnen somit mit mutt-wizard sicheren Zugriff auf alle Ihre E-Mail-Konten auf Ihrem System gibt, ohne jemals ein Passwort eingeben zu müssen.
 
-If you don't want to use this program, you can also increase the cache time of an inputted GPG password with the
+Wenn Sie dieses Programm nicht verwenden möchten, können Sie auch die Zwischenspeicherzeit eines eingegebenen GPG-Passworts mit den Variablen
 .I default-cache-ttl
-and
+und
 .I max-cache-ttl
-variables in your
+in Ihrer
 .I
-gpg-agent.conf.
-.SH MUTT-WIZARD'S NEOMUTT CONFIGURATION
-Here is a list of not only mutt-wizard's particular defaults, but what you need to get the most out of email accounts configured with mutt-wizard.
+gpg-agent.conf
+erhöhen.
+.SH MUTT-WIZARD'S NEOMUTT-KONFIGURATION
+Hier ist eine Liste nicht nur der besonderen Standardeinstellungen von mutt-wizard, sondern auch dessen, was Sie benötigen, um das Meiste aus E-Mail-Konten zu holen, die mit mutt-wizard konfiguriert wurden.
 .TP
-.B Color
-The mutt-wizard's default settings add color to messages in the index and color mail details to make them easier to see. New mail, in addition to being marked by the typical N, will also be bold.
+.B Farbe
+Die Standardeinstellungen von mutt-wizard fügen den Nachrichten im Index Farbe hinzu und färben E-Mail-Details, um sie leichter erkennbar zu machen. Neue E-Mails werden zusätzlich zur typischen N-Markierung auch fett dargestellt.
 .TP
-.B Movement with h/j/k/l
-Use vim keys to move down
+.B Bewegung mit h/j/k/l
+Verwenden Sie Vim-Tasten, um in E-Mails nach unten
 .I j
-or up
+oder nach oben
 .I k
-in mail, while
+zu gehen, während
 .I l
-opens mail, then the attachment view, then an attachment, while
+E-Mails öffnet, dann die Anhangsansicht, dann einen Anhang, während
 .I h
-is the reverse.
-While mail is open, go to next or previous mail with
+die Umkehrung ist.
+Während eine E-Mail geöffnet ist, gehen Sie mit
 .I J
-and
-.I K.
-In the mail index,
+und
+.I K
+zur nächsten oder vorherigen E-Mail.
+Im E-Mail-Index gehen
 .I d
-and
+und
 .I u
-go down and up by a half page and
+um eine halbe Seite nach unten und oben und
 .I gg
-and
+und
 .I G
-go to the very top and very bottom.
+ganz nach oben und ganz nach unten.
 .TP
-.B Search mail
-If you have
+.B E-Mails durchsuchen
+Wenn Sie
 .B notmuch
-configured with your proper mail directory (see above), you may run
-.I ctrl-f
-to search for mail containing any given sequence.
-Even without notmuch,
+mit Ihrem korrekten E-Mail-Verzeichnis konfiguriert haben (siehe oben), können Sie
+.I Strg-f
+ausführen, um nach E-Mails zu suchen, die eine beliebige Sequenz enthalten.
+Auch ohne notmuch begrenzt
 .I L
-limits mail, showing only those with the given sequence in the subject while
+E-Mails und zeigt nur diejenigen mit der angegebenen Sequenz im Betreff, während
 .I A
-shows all mail (same as limiting to "all").
+alle E-Mails anzeigt (dasselbe wie die Begrenzung auf "alle").
 .TP
-.B Deleting mail
+.B E-Mails löschen
 .I D
-deletes mail, while
+löscht E-Mails, während
 .I U
-undeletes it (type in mail number to get to deleted mail). Note that
+sie wiederherstellt (geben Sie die E-Mail-Nummer ein, um zu gelöschten E-Mails zu gelangen). Beachten Sie, dass
 .I S
-saves your mailbox, finalizing deletion. If you have a
-.I Trash
-box, deleted mail is moved there. If you want it to skip that and simply be deleted, comment out or remove the
+Ihren Posteingang speichert und die Löschung abschließt. Wenn Sie einen
+.I Papierkorb
+haben, werden gelöschte E-Mails dorthin verschoben. Wenn Sie möchten, dass sie diesen überspringen und einfach gelöscht werden, kommentieren Sie die Zeile
 .I set trash
-line in that account's muttrc.
+in der muttrc dieses Kontos aus oder entfernen Sie sie.
 .TP
-.B Send mail
+.B E-Mails senden
 .I m
-creates a new mail message;
+erstellt eine neue E-Mail-Nachricht;
 .I r
-replies to the selected message;
+antwortet auf die ausgewählte Nachricht;
 .I R
-replies all to the selected message and
+antwortet allen auf die ausgewählte Nachricht und
 .I f
-forwards the selected message.
+leitet die ausgewählte Nachricht weiter.
 .TP
-.B Compose mail screen
-Once you write mail and save the buffer you will be brought to the compose screen. Press
+.B E-Mail-Verfassungsbildschirm
+Sobald Sie eine E-Mail geschrieben und den Puffer gespeichert haben, gelangen Sie zum Verfassungsbildschirm. Drücken Sie
 .I a
-to add attachments, use
+um Anhänge hinzuzufügen, verwenden Sie
 .I s/t/c/b/d
-to change the subject/to/CC/BCC/description. Press
+um Betreff/An/CC/BCC/Beschreibung zu ändern. Drücken Sie
 .I S
-to change the signature/encryption. Press
+um die Signatur/Verschlüsselung zu ändern. Drücken Sie
 .I y
-to send the mail.
+um die E-Mail zu senden.
 .TP
-.B Saving and autocompleting email addresses with abook
-Install the optional dependency abook and you will be able to save the sender's email address with
-.I a.
-Once this is done, when you are typing in any email/contact prompt, you may press
+.B E-Mail-Adressen mit abook speichern und automatisch vervollständigen
+Installieren Sie die optionale Abhängigkeit abook und Sie können die E-Mail-Adresse des Absenders mit
+.I a
+speichern. Sobald dies geschehen ist, können Sie bei der Eingabe einer E-Mail/Kontakt-Aufforderung
 .I Tab
-to find contacts matching your input. Although abook is often used with mutt, it is also a useful program in its own right.
+drücken, um Kontakte zu finden, die Ihrer
+Eingabe entsprechen. Obwohl abook oft mit mutt verwendet wird, ist es auch ein nützliches Programm für sich.
 .TP
-.B Switching and moving mail between mailboxes
-The
+.B Zwischen Postfächern wechseln und E-Mails verschieben
+Die Taste
 .I g
-key can be paired with several other keys to automatically move to another mailbox: gi: Inbox; gs: Sent; gd: Drafts; ga: Archive; gS: Spam; gj: Junk; gt: Trash. These bindings will only be present for accounts that have the boxes in question. Instead of
-.I g,
-you can also press
+kann mit mehreren anderen Tasten kombiniert werden, um automatisch zu einem anderen Postfach zu wechseln: gi: Posteingang; gs: Gesendet; gd: Entwürfe; ga: Archiv; gS: Spam; gj: Junk; gt: Papierkorb. Diese Bindungen sind nur für Konten vorhanden, die die betreffenden Postfächer haben. Anstelle von
+.I g
+können Sie auch
 .I C
-to copy mail or
+drücken, um E-Mails zu kopieren oder
 .I M
-to move mail to the same boxes.
+um E-Mails in dieselben Postfächer zu verschieben.
 .TP
-.B Switching between accounts
-mutt-wizard can configure as many as nine accounts each numbered by the lowest available number when configured. Press
+.B Zwischen Konten wechseln
+mutt-wizard kann bis zu neun Konten konfigurieren, die jeweils mit der niedrigsten verfügbaren Nummer bei der Konfiguration nummeriert werden. Drücken Sie
 .I i
-followed by an account's number to change to that account: i2, i5, etc.
-.I ctrl-b
-to open a menu to select a url you want to open in you browser.
+gefolgt von der Nummer eines Kontos, um zu diesem Konto zu wechseln: i2, i5, usw.
+.I Strg-b
+um ein Menü zu öffnen, um eine URL auszuwählen, die Sie in Ihrem Browser öffnen möchten.
 .TP
-.B Sidebar
-mutt-wizard enables the sidebar by default which displays your account's boxes with mail tallies.
+.B Seitenleiste
+mutt-wizard aktiviert standardmäßig die Seitenleiste, die die Postfächer Ihres Kontos mit E-Mail-Zählungen anzeigt.
 .I B
-will toggle the sidebar. Move up and down in it with
-.I ctrl-k/j.
-Open a box with
-.I ctrl-o.
+schaltet die Seitenleiste um. Bewegen Sie sich mit
+.I Strg-k/j
+auf und ab. Öffnen Sie ein Postfach mit
+.I Strg-o.
 .TP
-.B More information
-Remember that you can press
+.B Weitere Informationen
+Denken Sie daran, dass Sie jederzeit
 .I ?
-at any time in neomutt to get a list of all key-bindings and functions. This list can also vary for different context menus.
-.SH AUTHORS
-Written by Luke Smith <luke@lukesmith.xyz> originally in 2018.
-.SH LICENSE
+in neomutt drücken können, um eine Liste aller Tastenbindungen und Funktionen zu erhalten. Diese Liste kann auch für verschiedene Kontextmenüs variieren.
+.SH AUTOREN
+Geschrieben von Luke Smith <luke@lukesmith.xyz> ursprünglich im Jahr 2018.
+.SH LIZENZ
 GPLv3
-.SH SEE ALSO
+.SH SIEHE AUCH
 .BR mailsync (1),
 .BR neomutt (1),
 .BR neomuttrc (1)
