@@ -2,46 +2,37 @@
 
 https://muttwizard.com/
 
-Get this great stuff without effort:
+Erhalten Sie diese großartigen Funktionen ohne Aufwand:
 
-- A full-featured and autoconfigured email client on the terminal with neomutt
-- Mail stored offline enabling the ability to:
-    * view and write emails while you're away from
-      the internet
-    * make backups
-- Provides a `mailsync` script that can be scheduled to run as often as you
-  like, which downloads/syncs mail and optionally notifies you when new mail has arrived.
+- Einen voll ausgestatteten und automatisch konfigurierten E-Mail-Client im Terminal mit neomutt
+- Offline gespeicherte E-Mails, die es Ihnen ermöglichen:
+    * E-Mails zu lesen und zu schreiben, während Sie offline sind
+    * Backups zu erstellen
+- Stellt ein `mailsync`-Skript bereit, das so oft wie gewünscht ausgeführt werden kann, um E-Mails herunterzuladen/zu synchronisieren und optional bei Erhalt neuer E-Mails zu benachrichtigen.
 
-Specifically, this wizard:
+Dieser Wizard:
 
-- Determines your email server's IMAP and SMTP servers and ports
-- Creates dotfiles for `neomutt`, `isync`, and `msmtp` appropriate for your
-  email address
-- Encrypts and locally stores your password for easy remote access, accessible
-  only by your GPG key
-- Handles as many as nine separate email accounts automatically
-- Auto-creates bindings to switch between accounts or between mailboxes
-- Provides sensible defaults and an attractive appearance for the neomutt email
-  client
-- If mutt-wizard doesn't know your server's IMAP/SMTP info by default, it will
-  prompt you for them and will put them in all the right places.
+- Ermittelt die IMAP- und SMTP-Server und -Ports Ihres E-Mail-Servers
+- Erstellt Dot-Files für `neomutt`, `isync` und `msmtp`, die für Ihre E-Mail-Adresse geeignet sind
+- Verschlüsselt und speichert Ihr Passwort lokal für einfachen Fernzugriff, nur mit Ihrem GPG-Schlüssel zugänglich
+- Verwaltet automatisch bis zu neun separate E-Mail-Konten
+- Erstellt automatisch Bindungen zum Wechseln zwischen Konten oder Postfächern
+- Bietet sinnvolle Standardeinstellungen und ein attraktives Erscheinungsbild für den neomutt E-Mail-Client
+- Wenn mutt-wizard die IMAP/SMTP-Informationen Ihres Servers nicht standardmäßig kennt, werden Sie danach gefragt und die Informationen an allen richtigen Stellen eingetragen.
 
-## Install
+## Installation
 
-#### Dependencies
+#### Abhängigkeiten
 
-- `neomutt` - the email client. (If you are using Gentoo GNU/Linux, you will need the `sasl` use flag to be enabled)
-- `curl` - tests connections (required at install).
-- `isync` - downloads and syncs the mail (required if storing IMAP mail locally).
-- `msmtp` - sends the email.
-- `pass` - safely encrypts passwords (required at install).
-- `ca-certificates` - required for SSL. Probably installed already.
-- `gettext` - writes config files. Probably installed already.
+- `neomutt` - der E-Mail-Client. (Wenn Sie Gentoo GNU/Linux verwenden, benötigen Sie das `sasl` Use-Flag aktiviert)
+- `curl` - testet Verbindungen (bei der Installation erforderlich).
+- `isync` - lädt E-Mails herunter und synchronisiert sie (erforderlich, wenn IMAP-E-Mails lokal gespeichert werden).
+- `msmtp` - sendet die E-Mails.
+- `pass` - verschlüsselt Passwörter sicher (bei der Installation erforderlich).
+- `ca-certificates` - für SSL erforderlich. Wahrscheinlich bereits installiert.
+- `gettext` - schreibt Konfigurationsdateien. Wahrscheinlich bereits installiert.
 
-**Note**: There's a chance of errors if you use a slow-release distro like
-Ubuntu, Debian, or Mint. If you get errors in `neomutt`, install the most
-recent version manually or manually remove the offending lines in the config in
-`/usr/share/mutt-wizard/mutt-wizard.muttrc`.
+**Hinweis**: Bei langsam aktualisierten Distributionen wie Ubuntu, Debian oder Mint können Fehler auftreten. Wenn Sie Fehler in `neomutt` erhalten, installieren Sie die neueste Version manuell oder entfernen Sie die problematischen Zeilen in der Konfiguration in `/usr/share/mutt-wizard/mutt-wizard.muttrc` manuell.
 
 ```bash
 git clone https://github.com/LukeSmithxyz/mutt-wizard
@@ -49,178 +40,120 @@ cd mutt-wizard
 sudo make install
 ```
 
-A user of Arch-based distros can also install the current mutt-wizard release from the AUR as
-[mutt-wizard](https://aur.archlinux.org/packages/mutt-wizard/), or the Github master branch, [mutt-wizard-git](https://aur.archlinux.org/packages/mutt-wizard-git/).
+Benutzer von Arch-basierten Distributionen können auch die aktuelle mutt-wizard-Version aus dem AUR als [mutt-wizard](https://aur.archlinux.org/packages/mutt-wizard/) oder den Github-Master-Branch als [mutt-wizard-git](https://aur.archlinux.org/packages/mutt-wizard-git/) installieren.
 
-### Optional Dependencies
+### Optionale Abhängigkeiten
 
-- `pam-gnupg` - Automatically logs you into your GPG key on login so you will
-  never need to input your password once logged on to your system. Check the
-  repo and directions out [here](https://github.com/cruegge/pam-gnupg).
-- `lynx` - view HTML email in neomutt.
-- `notmuch` - index and search mail. Install it and run `notmuch setup`, tell
-  it that your mail is in `~/.local/share/mail/` (although `mw` will do this
-  automatically if you haven't set notmuch up before). You can run it in mutt
-  with <kbd>ctrl-f</kbd>. Run `notmuch new` to process new mail.
-- `abook` - a terminal-based address book. Pressing tab while typing an address
-  to send mail to will suggest contacts that are in your abook.
-- `urlview` - outputs urls in mail to browser.
-- `cronie` - (or any other major cronjob manager) to set up automatic mail
-  syncing.
-- `mpop` - If you want to use POP protocol instead of IMAP.
+- `pam-gnupg` - Meldet Sie beim Login automatisch bei Ihrem GPG-Schlüssel an, sodass Sie nach der Anmeldung an Ihrem System nie Ihr Passwort eingeben müssen. Prüfen Sie das Repository und die Anweisungen [hier](https://github.com/cruegge/pam-gnupg).
+- `lynx` - HTML-E-Mails in neomutt anzeigen.
+- `notmuch` - E-Mails indizieren und durchsuchen. Installieren Sie es und führen Sie `notmuch setup` aus, geben Sie an, dass sich Ihre E-Mails in `~/.local/share/mail/` befinden (obwohl `mw` dies automatisch tut, wenn Sie notmuch noch nicht eingerichtet haben). Sie können es in mutt mit <kbd>Strg-f</kbd> ausführen. Führen Sie `notmuch new` aus, um neue E-Mails zu verarbeiten.
+- `abook` - ein terminalbasiertes Adressbuch. Durch Drücken der Tab-Taste während der Eingabe einer Adresse zum Senden von E-Mails werden Kontakte vorgeschlagen, die sich in Ihrem abook befinden.
+- `urlview` - gibt URLs in E-Mails an den Browser weiter.
+- `cronie` - (oder ein anderer großer Cronjob-Manager) zum Einrichten der automatischen E-Mail-Synchronisation.
+- `mpop` - Wenn Sie das POP-Protokoll anstelle von IMAP verwenden möchten.
 
+## Verwendung
 
-## Usage
+Der mutt-wizard wird über den Befehl `mw` ausgeführt. Nach Abschluss der Einrichtung verwenden Sie `neomutt`, um auf Ihre E-Mails zuzugreifen.
 
-The mutt-wizard runs via the command `mw`. Once setup is complete, you'll use
-`neomutt` to access your mail.
+- `mw -a you@email.com` -- ein neues E-Mail-Konto hinzufügen
+- `mw -l` -- vorhandene Konten auflisten
+- `mw -d` -- ein zu löschendes Konto auswählen
+- `mw -D your@email.com` -- Kontoeinstellungen ohne Bestätigung löschen
+- `mw -t 30` -- automatische Mailsync alle 30 Minuten umschalten
+- `mw -T` -- Mailsync umschalten ohne Minutenangabe (Standard ist 10)
+- `mw -r` -- Kontokürzelnummern neu ordnen
+- `pass edit mw-your@email.com` -- das Passwort eines Kontos überarbeiten
+- `mailsync` -- alle konfigurierten E-Mail-Konten synchronisieren. Gibt auch Benachrichtigungen über neue E-Mails und indiziert neue E-Mails stillschweigend mit notmuch.
+- `mailsync your@email.com` -- ein bestimmtes (oder mehrere) E-Mail-Konto(en) synchronisieren.
 
-- `mw -a you@email.com` -- add a new email account
-- `mw -l` -- list existing accounts
-- `mw -d` -- choose an account to delete
-- `mw -D your@email.com` -- delete account settings without confirmation
-- `mw -t 30` -- toggle automatic mailsync to every 30 minutes
-- `mw -T` -- toggle mailsync without specifying minutes (default is 10)
-- `mw -r` -- reorder account shortcut numbers
-- `pass edit mw-your@email.com` -- revise an account's password
-- `mailsync` -- sync all configured email accounts. Also gives notifications of new mail and indexes new mail with notmuch silently.
-- `mailsync your@email.com` -- sync a particular (or several) email account(s).
+### Optionen beim Hinzufügen eines Kontos
 
-### Options usable when adding an account
+#### Bereitstellung von Argumenten
 
-#### Providing arguments
+- `-u` -- Geben Sie einen Benutzernamen für das Konto an, wenn er sich von der E-Mail-Adresse unterscheidet.
+- `-n` -- Ein echter Name, der vom Konto verwendet werden soll. In Anführungszeichen setzen, wenn es mehrere Wörter sind.
+- `-i` -- IMAP-Server-Adresse
+- `-I` -- IMAP-Server-Port (ansonsten wird 993 angenommen)
+- `-s` -- SMTP-Server-Adresse
+- `-S` -- SMTP-Server-Port (ansonsten wird 465 angenommen)
+- `-m` -- Maximale Anzahl von E-Mails, die offline gehalten werden sollen. Standardmäßig gibt es kein Maximum.
+- `-x` -- Kontopasswort. Andernfalls werden Sie danach gefragt.
 
-- `-u` -- Give an account username if different from the email address.
-- `-n` -- A real name to be used by the account. Put in quotations if multiple
-  words.
-- `-i` -- IMAP server address
-- `-I` -- IMAP server port (otherwise assumed to be 993)
-- `-s` -- SMTP server address
-- `-S` -- SMTP server port (otherwise assumed to be 465)
-- `-m` -- Maximum number of emails to be kept offline. No maximum is default
-  functionality.
-- `-x` -- Account password. You will be prompted for it otherwise.
+#### Allgemeine Einstellungen
 
-#### General Settings
+- `-f` -- Postfachnamen annehmen und die Kontokonfiguration erzwingen, ohne überhaupt online zu gehen.
+- `-o` -- Mutt für ein Konto konfigurieren, aber keine E-Mails offline halten.
+- `-p` -- POP-Protokoll anstelle von IMAP verwenden (erfordert die Installation von `mpop`).
+- `mailsync` gibt standardmäßig visuelle Nachrichten über neue E-Mails aus. Oder setzen Sie `MAILSYNC_MUTE=1` als Umgebungsvariable, wenn Sie diese nicht haben möchten.
 
-- `-f` -- Assume mailbox names and force account configuration without
-  connecting online at all.
-- `-o` -- Configure mutt for an account, but do not keep mail offline.
-- `-p` -- Use POP protocol instead of IMAP (requires `mpop` installed).
-- `mailsync` gives visual messages of new mail by default. Or, set
-  `MAILSYNC_MUTE=1` as an environmental variable if you prefer not having them.
+## Neomutt Benutzeroberfläche
 
-## Neomutt user interface
+Um Ihnen eine Vorstellung von der Benutzeroberfläche zu geben, hier eine Idee:
 
-To give you an example of the interface, here's an idea:
+- <kbd>m</kbd> - E-Mail senden (verwendet Ihren Standard-`$EDITOR` zum Schreiben)
+- <kbd>j</kbd>/<kbd>k</kbd> und <kbd>d</kbd>/<kbd>u</kbd> - vim-ähnliche Bindungen zum Auf- und Abwärtsbewegen (oder <kbd>d</kbd>/<kbd>u</kbd> um eine Seite nach unten/oben zu gehen).
+- <kbd>l</kbd> - E-Mail öffnen, oder Anhangsseite oder Anhang
+- <kbd>h</kbd> - das Gegenteil von <kbd>l</kbd>
+- <kbd>r</kbd>/<kbd>R</kbd> - auf hervorgehobene E-Mail antworten/allen antworten
+- <kbd>s</kbd> - ausgewählte E-Mail oder ausgewählten Anhang speichern
+- <kbd>gs</kbd>,<kbd>gi</kbd>,<kbd>ga</kbd>,<kbd>gd</kbd>,<kbd>gS</kbd> - Drücken Sie <kbd>g</kbd> gefolgt von einem anderen Buchstaben, um das Postfach zu wechseln: <kbd>s</kbd>ent (gesendet), <kbd>i</kbd>nbox (Posteingang), <kbd>a</kbd>rchive (Archiv), <kbd>d</kbd>rafts (Entwürfe), <kbd>S</kbd>pam, usw.
+- <kbd>M</kbd> und <kbd>C</kbd> - Für <kbd>M</kbd>ove (Verschieben) und <kbd>C</kbd>opy (Kopieren): Folgen Sie ihnen mit einem der obigen Postfachbuchstaben, d.h. <kbd>MS</kbd> bedeutet "in Spam verschieben".
+- <kbd>i#</kbd> - Drücken Sie <kbd>i</kbd> gefolgt von einer Zahl 1-9, um zu einem anderen Konto zu wechseln. Wenn Sie 9 Konten über mutt-wizard hinzufügen, wird jedem eine Nummer zugewiesen.
+- <kbd>a</kbd> um Adresse/Person zu abook hinzuzufügen und <kbd>Tab</kbd> während der Adresseingabe, um eine aus abook zu vervollständigen.
+- <kbd>?</kbd> - alle Tastaturkürzel anzeigen
+- <kbd>Strg-j</kbd>/<kbd>Strg-k</kbd> - in der Seitenleiste auf- und abwärts bewegen, <kbd>Strg-o</kbd> öffnet das Postfach.
+- <kbd>Strg-b</kbd> - ein Menü öffnen, um eine URL auszuwählen, die Sie in Ihrem Browser öffnen möchten.
+- <kbd>p</kbd> - Ihre Nachricht verschlüsseln/signieren (in der Verfassungsansicht, bevor Sie die E-Mail senden).
 
-- <kbd>m</kbd> - send mail (uses your default `$EDITOR` to write)
-- <kbd>j</kbd>/<kbd>k</kbd> and <kbd>d</kbd>/<kbd>u</kbd> - vim-like bindings to go down and up (or <kbd>d</kbd>/<kbd>u</kbd> to go
-  down/up a page).
-- <kbd>l</kbd> - open mail, or attachment page or attachment
-- <kbd>h</kbd> - the opposite of <kbd>l</kbd>
-- <kbd>r</kbd>/<kbd>R</kbd> - reply/reply all to highlighted mail
-- <kbd>s</kbd> - save selected mail or selected attachment
-- <kbd>gs</kbd>,<kbd>gi</kbd>,<kbd>ga</kbd>,<kbd>gd</kbd>,<kbd>gS</kbd> - Press <kbd>g</kbd> followed by another letter to change
-  mailbox: <kbd>s</kbd>ent, <kbd>i</kbd>nbox, <kbd>a</kbd>rchive, <kbd>d</kbd>rafts, <kbd>S</kbd>pam, etc.
-- <kbd>M</kbd> and <kbd>C</kbd> - For <kbd>M</kbd>ove and <kbd>C</kbd>opy: follow them with one of the mailbox
-  letters above, i.e. <kbd>MS</kbd> means "move to Spam".
-- <kbd>i#</kbd> - Press <kbd>i</kbd> followed by a number 1-9 to go to a different account. If you
-  add 9 accounts via mutt-wizard, they will each be assigned a number.
-- <kbd>a</kbd> to add address/person to abook and <kbd>Tab</kbd> while typing address to complete
-  one from abook.
-- <kbd>?</kbd> - see all keyboard shortcuts
-- <kbd>ctrl-j</kbd>/<kbd>ctrl-k</kbd> - move up and down in sidebar, <kbd>ctrl-o</kbd> opens mailbox.
-- <kbd>ctrl-b</kbd> - open a menu to select a URL you want to open in your browser.
-- <kbd>p</kbd> - encrypt/sign your message (in compose view, before sending the email).
+## Zusätzliche Funktionalität
 
-## Additional functionality
+- `pam-gnupg` - Meldet Sie beim Login automatisch bei Ihrem GPG-Schlüssel an, sodass Sie nach der Anmeldung an Ihrem System nie Ihr Passwort eingeben müssen. Prüfen Sie das Repository und die Anweisungen [hier](https://github.com/cruegge/pam-gnupg).
+- `lynx` - HTML-E-Mails in neomutt anzeigen.
+- `notmuch` - E-Mails indizieren und durchsuchen. Installieren Sie es und führen Sie `notmuch setup` aus, geben Sie an, dass sich Ihre E-Mails in `~/.local/share/mail/` befinden (obwohl `mw` dies automatisch tut, wenn Sie notmuch noch nicht eingerichtet haben). Sie können es in mutt mit <kbd>Strg-f</kbd> ausführen. Führen Sie `notmuch new` aus, um neue E-Mails zu verarbeiten.
+- `abook` - Ein terminalbasiertes Adressbuch. Durch Drücken der Tab-Taste während der Eingabe einer Adresse zum Senden von E-Mails werden Kontakte vorgeschlagen, die sich in Ihrem abook befinden.
+- `urlview` - Gibt URLs in einer E-Mail an Ihren Browser weiter.
 
-- `pam-gnupg` - Automatically logs you into your GPG key on login, so you will
-  never need to input your password once logged on to your system. Check the
-  repo and directions out [here](https://github.com/cruegge/pam-gnupg).
-- `lynx` - View HTML email in neomutt.
-- `notmuch` - Index and search mail. Install it and run `notmuch setup`, tell it
-  that your mail is in `~/.local/share/mail/` (although `mw` will do this
-  automatically if you haven't set notmuch up before). You can run it in mutt
-  with <kbd>ctrl-f</kbd>. Run `notmuch new` to process new mail.
-- `abook` - A terminal-based address book. Pressing tab while typing an address
-  to send mail to will suggest contacts that are in your abook.
-- `urlview` - Outputs URLs in an email to your browser.
+## Neue Funktionen und Verbesserungen seit der ursprünglichen Veröffentlichung
 
-## New stuff and improvements since the original release
+- `mw` ist jetzt über Befehlszeilenoptionen skriptfähig und kann erfolgreich ohne jegliche Interaktion ausgeführt werden, was es möglich macht, es in einem Skript einzusetzen.
+- `isync`/`mbsync` hat `offlineimap` als Backend ersetzt. Offlineimap war fehleranfällig, aufgebläht, verwendete veraltete Python 2-Module und erforderte separate Schritte zur Installation des Systems.
+- `mw` ist jetzt ein installiertes Programm, anstatt nur ein Skript, das in Ihrem mutt-Ordner aufbewahrt werden musste.
+- `dialog` wird nicht mehr verwendet und die Schnittstelle besteht einfach aus Textbefehlen.
+- Mehr automatisch generierte Tastenkombinationen, die ein schnelles Verschieben und Kopieren von E-Mails zwischen Postfächern ermöglichen.
+- Elegantere Behandlung von Anhängen. Bild-/Video-/PDF-Anhänge ohne Abhängigkeit von der neomutt-Instanz.
+- abook-Integration standardmäßig.
+- Die unübersichtlichen Vorlagendateien und anderen Verzeichnisse wurden verschoben oder entfernt, was zu einem sauberen Konfigurationsordner führt.
+- msmtp-Konfigurationen wurden nach `~/.config/` verschoben und der Standard-E-Mail-Speicherort wurde nach `~/.local/share/mail/` verschoben, was die Unordnung in `~` reduziert.
+- `pass` wird als Passwort-Manager verwendet, anstatt Passwörter separat zu speichern.
+- Das Skript ist POSIX sh-konform.
+- Fehlerbehandlung für die vielen Leute, die Anweisungen nicht lesen oder befolgen. Generell weniger Fehler.
+- Hinzufügen eines Handbuchs `man mw`
+- Verarbeitet jetzt das POP-Protokoll über `mpop` für diejenigen, die es bevorzugen (fügen Sie ein Konto mit der Option `-p` hinzu). POP-Konfigurationen werden immer noch automatisch generiert.
 
-- `mw` is now scriptable with command-line options and can run successfully
-  without any interaction, making it possible to deploy in a script.
-- `isync`/`mbsync` has replaced `offlineimap` as the backend. Offlineimap was
-  error-prone, bloated, used obsolete Python 2 modules, and required separate
-  steps to install the system.
-- `mw` is now an installed program instead of just a script needed to be kept in
-  your mutt folder.
-- `dialog` is no longer used and the interface is simply text commands.
-- More autogenerated shortcuts that allow quickly moving and copying mail
-  between boxes.
-- More elegant attachment handling. Image/video/pdf attachments without relying
-  on the neomutt instance.
-- abook integration by default.
-- The messy template files and other directories have been moved or removed,
-  leaving a clean config folder.
-- msmtp configs moved to `~/.config/` and mail default location moved to
-  `~/.local/share/mail/`, reducing mess in `~`.
-- `pass` is used as a password manager instead of separately saving passwords.
-- Script is POSIX sh compliant.
-- Error handling for the many people who don't read or follow directions. Fewer
-  errors generally.
-- Addition of a manual `man mw`
-- Now handles POP protocol via `mpop` for those who prefer it (add an account
-  with the `-p` option). POP configs are still generated automatically.
+## Helfen Sie dem Projekt!
 
-## Help the Project!
-
-
-- Try mutt-wizard out on weird machines and weird email addresses and report any
-  errors.
-- Open a PR to add new server information into `domains.csv` so their users can
-  more easily use mutt-wizard.
-- If nothing else, donate:
+- Testen Sie mutt-wizard auf ungewöhnlichen Maschinen und mit ungewöhnlichen E-Mail-Adressen und melden Sie alle Fehler.
+- Öffnen Sie einen PR, um neue Serverinformationen in `domains.csv` hinzuzufügen, damit deren Benutzer mutt-wizard einfacher verwenden können.
+- Wenn sonst nichts, spenden Sie:
 	- XMR: `8AzeWXhJvYJ1VeENHcNXCR1dLMgDALreZ1BdooZVjRKndv6myr3t1ue6C4ML2an5fWSpcP1sTDA9nKUMevkukDXG6chRjNv`
 	- BTC: `bc1qacqfp36ffv9mafechmvk8f6r8qy4tual6rcm9p`
 
-## Details for Tinkerers
+## Details für Bastler
 
-- The critical `mutt`/`neomutt` files are in `~/.config/mutt/`.
-- Put whatever global settings you want in `muttrc`. mutt-wizard will add some
-  lines to this file, which you shouldn't remove unless you know what you're
-  doing, but you can move them up/down over your config lines if you need to. If
-  you get binding conflict errors in mutt, you might need to do this.
-- Each of the accounts that mutt-wizard generates will have custom settings set
-  in a separate file in `accounts/`. You can edit these freely if you want to
-  tinker with settings specific to an account.
-- In `/usr/share/mutt-wizard` are several global config files, including
-  `mutt-wizard`'s default settings. You can override this in your `muttrc` if
-  you wish.
+- Die wichtigen `mutt`/`neomutt`-Dateien befinden sich in `~/.config/mutt/`.
+- Legen Sie alle globalen Einstellungen, die Sie möchten, in `muttrc` fest. mutt-wizard wird einige Zeilen zu dieser Datei hinzufügen, die Sie nicht entfernen sollten, es sei denn, Sie wissen, was Sie tun, aber Sie können sie über Ihre Konfigurationszeilen nach oben/unten verschieben, wenn nötig. Wenn Sie Bindungskonflikte in mutt erhalten, müssen Sie dies möglicherweise tun.
+- Jedes der von mutt-wizard generierten Konten wird benutzerdefinierte Einstellungen in einer separaten Datei in `accounts/` haben. Sie können diese frei bearbeiten, wenn Sie mit den Einstellungen eines bestimmten Kontos experimentieren möchten.
+- In `/usr/share/mutt-wizard` befinden sich mehrere globale Konfigurationsdateien, einschließlich der Standardeinstellungen von `mutt-wizard`. Sie können diese in Ihrer `muttrc` überschreiben, wenn Sie möchten.
 
-## Watch out for these things
+## Achten Sie auf diese Dinge
 
-- Gmail accounts need to create an
-  [App Password](https://support.google.com/accounts/answer/185833?hl=en) to
-  use with  "less secure" applications. This password is single-use (i.e.
-  for setup) and will be stored and encrypted locally. Enabling third-party
-  applications requires turning off two-factor authentication and this will
-  circumvent that. You might also need to manually "Enable IMAP" in the
-  settings.
-  To create an App Password for your Google account,
-  you can directly visit the [App Passwords](https://myaccount.google.com/apppasswords) page in your Google Account settings.
-- If you have a university email or enterprise-hosted email for work, there
-  might be other hurdles or two-factor authentication you have to jump through.
-  Some, for example, will want you to create a separate IMAP password, etc.
-- `isync` is not fully UTF-8 compatible, so non-Latin characters may be garbled
-  (although sync should succeed). `mw` will also not auto-create mailbox
-  shortcuts since it is looking for English mailbox names. I strongly recommend
-  you to set your email language to English on your mail server to avoid these
-  problems.
+- Gmail-Konten müssen ein [App-Passwort](https://support.google.com/accounts/answer/185833?hl=de) erstellen, um mit "weniger sicheren" Anwendungen zu arbeiten. Dieses Passwort ist einmalig (d.h. für die Einrichtung) und wird lokal gespeichert und verschlüsselt. Die Aktivierung von Drittanbieteranwendungen erfordert das Ausschalten der Zwei-Faktor-Authentifizierung, und dies wird das umgehen. Möglicherweise müssen Sie auch manuell "IMAP aktivieren" in den Einstellungen.
+  Um ein App-Passwort für Ihr Google-Konto zu erstellen, können Sie direkt die [App-Passwörter](https://myaccount.google.com/apppasswords) Seite in Ihren Google-Kontoeinstellungen besuchen.
+- Wenn Sie eine Universitäts-E-Mail oder eine von Unternehmen gehostete E-Mail für die Arbeit haben, könnte es andere Hürden oder Zwei-Faktor-Authentifizierung geben, die Sie überwinden müssen. Einige werden zum Beispiel von Ihnen verlangen, ein separates IMAP-Passwort zu erstellen, usw.
+- `isync` ist nicht vollständig UTF-8-kompatibel, daher können nicht-lateinische Zeichen möglicherweise verstümmelt sein (obwohl die Synchronisation erfolgreich sein sollte). `mw` wird auch keine automatischen Postfach-Verknüpfungen erstellen, da es nach englischen Postfachnamen sucht. Ich empfehle Ihnen dringend, die Sprache Ihrer E-Mails auf Ihrem E-Mail-Server auf Englisch einzustellen, um diese Probleme zu vermeiden.
 
-## License
+## Lizenz
 
-mutt-wizard is free/libre software. This program is released under the GPLv3
-license, which you can find in the file [LICENSE](LICENSE).
+mutt-wizard ist freie/libre Software. Dieses Programm wird unter der GPLv3-Lizenz veröffentlicht, die Sie in der Datei [LICENSE](LICENSE) finden können.
+```
